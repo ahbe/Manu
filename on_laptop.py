@@ -13,7 +13,7 @@ import time
 import gc
 import json
 from json import JSONEncoder
-import websocket
+import websocket 
 import nltk
 from nltk.tokenize import PunktSentenceTokenizer
 import sys
@@ -25,8 +25,8 @@ from getch import getch
 import pause
 import numpy as np
 
-#websocket.enableTrace(True)
-#ws = websocket.create_connection("ws://10.54.234.95:1996")			#make websocket connection with Galileo board
+websocket.enableTrace(True)
+ws = websocket.create_connection("ws://10.54.234.95:1996")			#make websocket connection with Galileo board
 
 
 class NumPyArangeEncoder(json.JSONEncoder):							#this is for converting numpy array object to JSONEncoder to store it in file in json format
