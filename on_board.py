@@ -14,7 +14,7 @@ import tornado.web
 import tornado.websocket
 import tornado.template
 import json
-#import mraa
+import mraa
 import time
 import binascii
 
@@ -81,11 +81,11 @@ class WSHandler(tornado.websocket.WebSocketHandler):				#it is websocket listene
             ('FRIEND','66')
          ]
                                                                                                                                                                                             
-   # play_from_sdcard = bytearray([0x7E,0xFF,0x06,0x09,0x00,0x00,0x02,0xFE,0xF0,0xEF])			#this is code for playing file from sdcard
-   #  track_hex = bytearray([0x7E,0xFF,0x06,0x03,0x00,0x00,0xFF,0xFF,0xFF,0xEF])	#it is sample hex code for specifying track number. then we need to change chack bits and track number
-    #u = mraa.Uart(0)					#getting uart object
-   # u.setBaudRate(9600)					#setting baudrate
-    #u.write(play_from_sdcard)			#it is says mp3 module to play from sdcard
+    play_from_sdcard = bytearray([0x7E,0xFF,0x06,0x09,0x00,0x00,0x02,0xFE,0xF0,0xEF])			#this is code for playing file from sdcard
+    track_hex = bytearray([0x7E,0xFF,0x06,0x03,0x00,0x00,0xFF,0xFF,0xFF,0xEF])	#it is sample hex code for specifying track number. then we need to change chack bits and track number
+    u = mraa.Uart(0)					#getting uart object
+    u.setBaudRate(9600)					#setting baudrate
+    u.write(play_from_sdcard)			#it is says mp3 module to play from sdcard
     def open(self):						#this method is called when new connection is established 
         print('connection opened...')
 

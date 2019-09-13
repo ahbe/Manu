@@ -396,6 +396,7 @@ def main():
 	os.system('cls')
 	wordss = []
 	count = 1
+	w = ''
 	with open('data.json', 'r') as f:				#read data from json file
 		json_data = json.load(f)
 		f.close()
@@ -406,10 +407,10 @@ def main():
 		count += 1
 	while True:
 		if flg == 1:
-			what = 'r'
+			what = 'a'
 			flg = 0
 		else:
-			print "training, recognizing, send whole sentance or clear sentance? (t/r/s/c) : "
+			print "training, recognizing, send whole sentance or clear sentance? (t/r/s/c/a) : "
 			what = getch()			#select mode
 		if what == '\x03':				#ctrl+c to exit
 			exit()
@@ -456,8 +457,8 @@ def main():
 					listener.data = []
 					break
 		elif what == 'r':					#this mode is for stat recognizing gestures
-			print "recognizing will start after 3 second"
-			for i in xrange(3):
+			print "recognizing will start after a second"
+			for i in xrange(1):
 				print i+1
 				time.sleep(1)
 			print "recognizing started"
@@ -487,8 +488,38 @@ def main():
 		elif what == 's':
 			natural_sentence(copy.deepcopy(vakya))
 			vakya = ""
-			
-						
+		elif what == 'a':
+			while(w != 'stop'):
+				print "recognizing will start after a second"
+				for i in xrange(1):
+					print i+1
+					time.sleep(1)
+				print "recognizing started"
+				listener.enable = 1						#this enable start capturing data and compareswith stored data through is_this method of word's object
+				while True:
+					if listener.main_enable == 1:
+						listener.main_enable = 0
+						result = []
+						print "chacking..."
+						for word in wordss:
+							result.append(word.is_this(np.array(listener.data), listener.no_of_hand))
+						max_cnt = max(result)
+						if max_cnt > 9:
+							max_index = result.index(max_cnt)
+							listener.no_of_hand = 0
+							w = wordss[max_index].word
+							print wordss[max_index].word
+							if (w != 'stop'):
+								vakya += " "+wordss[max_index].word
+							print "whole sentance: ",vakya
+						else:
+							print "try again"
+						listener.data = []
+						break
+			natural_sentence(copy.deepcopy(vakya))
+			vakya = ""
+			w = ''
+			print "whole sentance is now cleared"
 		
 				
 				
