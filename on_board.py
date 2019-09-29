@@ -1,13 +1,5 @@
 
 
-#####################################################################
-#e-ySIP - 2016														#
-#author: Sanket R. Bhimani(B.Tech. 2nd year Computer Engineering)	#
-#June-2016															#
-#####################################################################
-
-###THIS WILL BE RUN ON GALILEO BOARD###
-
 
 import tornado.ioloop
 import tornado.web
